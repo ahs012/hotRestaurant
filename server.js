@@ -28,6 +28,8 @@ var reservations = [
     }
    ];
 
+var waitlist =[];
+
 app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "home.html"));
   });
@@ -45,12 +47,18 @@ app.get("/", function(req, res) {
     return res.json(reservations);
   });
 
+  app.get("/api/wait", function(req, res) {
+    return res.json(waitlist);
+  });
+
 
 //add reservation
 
 app.post("/api/reservations", function(req, res){
     var newRes=req.body;
-   
+if(reservations.length>5){
+  waitlist.push(newRes)
+};   
 
   console.log(newRes);
 

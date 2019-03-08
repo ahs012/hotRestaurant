@@ -36,6 +36,9 @@
 						<h4 class="panel-title">Current Reservations</h4>
 					</div>
 					<div class="panel-body" id="tableSection">
+						<ul id="resList" class="list-group">
+
+						</ul>
 					</div>
 
 					
@@ -52,17 +55,51 @@
 						<h4 class="panel-title">Waiting List</h4>
 					</div>
 					<div class="panel-body" id="tableSection">
+					<ul id="waitList" class="list-group">
+
+					</ul>
 					</div>
 
 					
 				</div>
 			</div>
 		</div>
-				<a href="/api/tables">API table link |</a>                
+				<a href="/api/reservations">API table link |</a>                
 				<a href="/api/wait">API Wait List</a>
 		
 
 			
         </div>
-					 
+	<script type="text/javascript">
+	$.get("/api/reservations", function(data) {
+        for (var i = 0; i < data.length; i++) {
+          console.log(data[i]);
+          var listGroupItem = $("<li class='list-group-item'>");
+
+          listGroupItem.append($("<h2>").text("Name: " + data[i].name));
+          listGroupItem.append($("<h3>").text("Phone: " + data[i].phone));
+          listGroupItem.append($("<h3>").text("Email: " + data[i].email));
+          listGroupItem.append($("<h3>").text("Time: " + data[i].time));
+
+          $("#resList").append(listGroupItem);
+        }
+	  });
+	  
+	  $.get("/api/wait", function(data) {
+        for (var i = 0; i < data.length; i++) {
+          console.log(data[i]);
+          var listGroupItem = $("<li class='list-group-item'>");
+
+          listGroupItem.append($("<h2>").text("Name: " + data[i].name));
+          listGroupItem.append($("<h3>").text("Phone: " + data[i].phone));
+          listGroupItem.append($("<h3>").text("Email: " + data[i].email));
+          listGroupItem.append($("<h3>").text("Time: " + data[i].time));
+
+          $("#waitList").append(listGroupItem);
+        }
+      });
+    </script>
+
+
+	</script>				 
 </body>
