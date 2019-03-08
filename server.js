@@ -56,15 +56,19 @@ app.get("/", function(req, res) {
 
 app.post("/api/reservations", function(req, res){
     var newRes=req.body;
-if(reservations.length>5){
-  waitlist.push(newRes)
-};   
 
-  console.log(newRes);
+    console.log(reservations.length);
+  
+    if(reservations.length>5){
+  waitlist.push(newRes)
+  } else {  
+
+  console.log(`Tables: ${newRes}`);
 
   reservations.push(newRes);
 
   res.json(newRes);
+  }
 });
 
 
